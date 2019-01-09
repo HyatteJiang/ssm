@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.RecordDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+
+
+    <select id="queryAll" resultType="record">
+      select dt::date as date,count(*) as cnt
+      from kafka_data_fix.ext
+      where status='fix'
+      group by date
+      order by date desc
+	</select>
+
+
+</mapper>

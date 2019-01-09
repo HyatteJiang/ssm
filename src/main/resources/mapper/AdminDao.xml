@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.AdminDao">
+
+    <insert id="insertAdmin" parameterType="admin"> insert into data.admin
+		(admin_account,admin_passwd,admin_name,admin_email,admin_tel)
+		values
+		(#{admin_account},#{admin_passwd},#{admin_name},#{admin_email},#{admin_tel})
+	</insert>
+
+    <update id="updateAdmin" parameterType="admin">
+        update
+        data.admin
+        <set>
+            <if test="admin_name!=null and admin_name!=''">admin_name=#{admin_name}
+                ,
+            </if>
+            <if test="admin_account!=null and admin_account!=''">admin_account=#{admin_account}
+                ,
+            </if>
+            <if test="admin_passwd!=null and admin_password!=''">admin_passwd=#{admin_passwd}
+                ,
+            </if>
+            <if test="admin_tel!=null and admin_tel!=''">admin_tel=#{admin_tel} ,</if>
+            <if test="admin_email!=null and admin_email!=''">admin_email=#{admin_email}</if>
+        </set>
+        where admin_id=#{admin_id}
+    </update>
+
+    <select id="queryAdmin" parameterType="admin"
+            resultType="admin">
+        select * from data.admin
+        <where>
+            <if test="admin_name!=null and admin_name!=''">admin_name=#{admin_name}
+            </if>
+            <if test="admin_account!=null and admin_account!=''">and admin_account=#{admin_account}
+            </if>
+            <if test="admin_passwd!=null and admin_passwd!=''">and admin_passwd=#{admin_passwd}
+            </if>
+            <if test="admin_tel!=null and admin_tel!=''">and admin_tel=#{admin_tel}</if>
+            <if test="admin_email!=null and admin_email!=''">and admin_email=#{admin_email}</if>
+        </where>
+    </select>
+
+</mapper>
